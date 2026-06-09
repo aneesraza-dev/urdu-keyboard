@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Urdu Keyboard Concept</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Jameel+Noori+Nastaleeq&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="light-mode">
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-en">Urdu Keyboard</span>
+      </div>
+      <div class="header-controls" dir="ltr">
+        <button id="btn-transliteration" class="toggle-btn active" title="Transliteration Mode">
+
+          <span class="toggle-label">Transliteration</span>
+        </button>
+        <button id="btn-toggle-keyboard" class="toggle-btn" title="Show/Hide Keyboard">
+
+          <span class="toggle-label">Keyboard</span>
+        </button>
+        <button id="btn-dark-mode" class="icon-btn" title="Toggle Dark Mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+
+
+    <section class="editor-panel">
+
+      <div class="toolbar toolbar-top" dir="ltr">
+        <div class="toolbar-group">
+          <label class="toolbar-label">Font</label>
+          <select id="font-select" class="ctrl-select">
+            <option value="'Noto Nastaliq Urdu', serif">Noto Nastaliq</option>
+            <option value="'Jameel Noori Nastaleeq', serif">Jameel Noori</option>
+            <option value="'Noto Naskh Arabic', serif">Noto Naskh</option>
+            <option value="'Arial Unicode MS', sans-serif">Arial Unicode</option>
+          </select>
+        </div>
+        <div class="toolbar-group toolbar-group--inline">
+          <label class="toolbar-label">Size</label>
+          <button id="btn-font-dec" class="icon-btn sm" title="Decrease Font">A−</button>
+          <span id="font-size-display" class="font-size-num">22</span>
+          <button id="btn-font-inc" class="icon-btn sm" title="Increase Font">A+</button>
+          <button id="btn-font-reset" class="icon-btn sm" title="Reset Font Size">↺</button>
+        </div>
+        <div class="toolbar-sep"></div>
+        <div class="toolbar-group toolbar-group--inline counters" dir="rtl">
+          <span class="counter-chip"><span id="word-count">0</span> Words</span>
+          <span class="counter-chip"><span id="char-count">0</span> Alphabets</span>
+        </div>
+      </div>
+
+      <div class="editor-wrapper">
+        <textarea id="urdu-editor" class="urdu-editor" dir="rtl" placeholder="یہاں اردو لکھیں..." spellcheck="false"
+          autocomplete="off" autocorrect="off" autocapitalize="off"></textarea>
+      </div>
+
+      <div class="toolbar toolbar-bottom" dir="ltr">
+        <button id="btn-copy" class="action-btn" title="Copy">
+          <svg viewBox="0 0 24 24">
+            <rect x="9" y="9" width="13" height="13" rx="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          Copy
+        </button>
+        <button id="btn-select-all" class="action-btn" title="Select All">
+          <svg viewBox="0 0 24 24">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 0-2 2h-3" />
+          </svg>
+          Select All
+        </button>
+        <button id="btn-download" class="action-btn" title="Download TXT">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Download
+        </button>
+       
+        <button id="btn-clear" class="action-btn action-btn--danger" title="Clear All">
+          <svg viewBox="0 0 24 24">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          </svg>
+          Clear All
+        </button>
+      </div>
+
+    </section>
+
+    <section id="keyboard-panel" class="keyboard-panel">
+      <div class="keyboard-header" dir="ltr">
+        <span class="kb-title">Virtual Keyboard</span>
+        <div class="kb-mode-indicator">
+          <span id="mode-label" class="mode-label">Transliteration ON</span>
+        </div>
+      </div>
+
+      <div id="virtual-keyboard" class="virtual-keyboard"></div>
+
+      <div class="keyboard-special-row" dir="ltr">
+        <button class="kb-special-btn" data-action="backspace">⌫ Backspace</button>
+        <button class="kb-special-btn kb-space" data-action="space">Space — اسپیس</button>
+        <button class="kb-special-btn" data-action="enter">Enter ↵</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="status-bar" class="status-bar" aria-live="polite"></div>
+
+  <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
